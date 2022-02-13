@@ -1,3 +1,12 @@
+'''
+musicplayer.py
+
+Copyright (c) 2022 s1gnsgrfu
+
+This software is released under the MIT License.
+see https://github.com/s1gnsgrfu/MusicPlayer/blob/master/LICENSE
+'''
+
 from pydub import AudioSegment
 from pydub.utils import mediainfo
 from pydub.playback import play
