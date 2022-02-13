@@ -6,27 +6,56 @@ Copyright (c) 2022 s1gnsgrfu
 This software is released under the MIT License.
 see https://github.com/s1gnsgrfu/MusicPlayer/blob/master/LICENSE
 '''
-
+#pydub,mutagen,pysimplegui,pytaglib
 from pydub import AudioSegment
 from pydub.utils import mediainfo
 from pydub.playback import play
+#from mutagen.easyid3 import EasyID3
+import taglib
 import PySimpleGUI as sg
 import time
+import re
 import threading
 import os
 
+border=1
+'''
+sud = 'music\\white forces.mp3'
+song = taglib.File(sud)
+title=str(song.tags['TITLE'])
+title=title.strip('[\'').strip('\']')
+print(title)'''
+
 sg.theme('DarkBlack')
 
-fti=sg.Frame('',[],size=(1280,100),border_width=0)
-fmi=sg.Frame('',[],size=(800,620),border_width=0)
-fle=sg.Frame('',[],size=(230,620),border_width=0)
-fri=sg.Frame('',[],size=(250,620),border_width=0)
+ftm=sg.Frame('',[],size=(680,100),border_width=border)
+
+ftl=sg.Frame('',[
+    [sg.Text(key='tit')]
+    ],size=(300,100),border_width=border)
+
+ftr=sg.Frame('',[],size=(300,100),border_width=border)
+
+fmi=sg.Frame('',[],size=(800,620),border_width=border)
+
+fle=sg.Frame('',[],size=(230,620),border_width=border)
+
+fri=sg.Frame('',[],size=(250,620),border_width=border)
+
 
 layout=[
-    [fle,fmi,fri],[fti]
+    [fle,fmi,fri],[ftl,ftm,ftr]
     ]
 
 window=sg.Window('MusicPlayer',layout,resizable=True)
+
+sud = 'music\\white forces.mp3'
+song = taglib.File(sud)
+title=str(song.tags['TITLE'])
+title=title.strip('[\'').strip('\']')
+print(title)
+#print(song.tags)
+#{'ALBUM': ['white forces'], 'ARTIST': ['fripSide'], 'COMMENT': ['Uploaded by Mashin'], 'DATE': ['2016'], 'GENRE': ['Anime'], 'TITLE': ['white forces'], 'TRACKNUMBER': ['1/4']}
 
 while True:
     event,values=window.read()
@@ -34,7 +63,7 @@ while True:
     if event is None:
         print('exit')
         break
-
+    window['out'].update(title)
 window.close()
 
 
