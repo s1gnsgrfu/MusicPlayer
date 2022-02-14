@@ -56,7 +56,7 @@ def plays():
 
     cover_img = Image.open(BytesIO(apic.data))
     cover_img.save(f"art\\{art}_{title}.jpg")
-    image_elem.update(source=f"art\\{art}_{title}.jpg")
+    #image_elem.update(source=f"art\\{art}_{title}.jpg")
     #window['arrt'].update(f"art\\{art}_{title}.jpg")
     #window.find_element('arrt').Update(source=f"art\\{art}_{title}.jpg")
     #window.find_element('arrt').Update(f"art\\{art}_{title}.jpg")
