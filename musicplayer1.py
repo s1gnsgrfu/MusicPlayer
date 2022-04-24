@@ -26,9 +26,9 @@ import os
 #import psutil
 
 def plays():
-    global title,sud,ext,bit,st,th,plpa,art,cover_img,value,artpath
+    global title,sud,ext,bit,st,th,plpa,art,cover_img,value
 
-    #bit = int(mediainfo(sud)['bit_rate'])
+    bit = int(mediainfo(sud)['bit_rate'])
 
     target='\\'
     idx=sud[::-1].find(target)
@@ -45,7 +45,6 @@ def plays():
 
     song = taglib.File(sud)
     title=str(song.tags['TITLE'])
-    #title=dic['TITLE']
     title=title.strip('[\'').strip('\']')
 
     art=str(song.tags['ARTIST'])
@@ -55,18 +54,15 @@ def plays():
 
     apic = tags.get("APIC:")
 
-    #アートワーク
     cover_img = Image.open(BytesIO(apic.data))
-    cover_img.save(f"C:\\Users\\s1gns\\Desktop\\Desktop\\Python\\musicplayer\\musicplayer\\art\\{art}_{title}.jpg")
-    artpath="C:\\Users\\s1gns\\Desktop\\Desktop\\Python\\musicplayer\\musicplayer\\art\\{art}_{title}.jpg"
-    #image_elem.update(source=f"art\\{art}_{title}.jpg")
+    cover_img.save(f"art\\{art}_{title}.jpg")
+    image_elem.update(source=f"art\\{art}_{title}.jpg")
     #window['arrt'].update(f"art\\{art}_{title}.jpg")
     #window.find_element('arrt').Update(source=f"art\\{art}_{title}.jpg")
     #window.find_element('arrt').Update(f"art\\{art}_{title}.jpg")
     #cover_img.show()
 
-    #print('Title:',title,'\tFormat:',ext,'\ttime:',round(time1),'sec','\tBitrate:',bit//1000,'Kbps\n')
-    print('Title:',title,'\tFormat:',ext,'\ttime:',round(time1),'sec\n')
+    print('Title:',title,'\tFormat:',ext,'\ttime:',round(time1),'sec','\tBitrate:',bit//1000,'Kbps\n')
   
     simpleaudio.stop_all()
     plpa='icon\\play.png'
@@ -79,13 +75,12 @@ def plays():
 def pl():
     global sud,ext,bit,plf,a,th,plpa
     plpa='icon\\pause.png'
-    #sound=AudioSegment.from_file(sud,format=ext,bitrate=bit,stop=True)
-    sound=AudioSegment.from_file(sud,format=ext,stop=True)
+    sound=AudioSegment.from_file(sud,format=ext,bitrate=bit,stop=True)
     a=play(sound)
     st=2
     plf=th=1
     return
-#再生中st==2
+
 
 def stop():
     simpleaudio.stop_all()
@@ -121,16 +116,8 @@ def playing():
         time.sleep(1)
     return
 
-def pref():
-    global mot
-    print('pref')
-    mot=[sg.Text('Preference',font=('Segoe UI Variable Small Light',20),pad=((40,0),(20,0)))],
-    [sg.Text('test01',font=('Segoe UI Variable Small Light',10),pad=((70,0),(50,0))),
-    sg.Radio('yes','pref1',key='radio01y',pad=((60,0),(50,0))),sg.Radio('no','pref1',key='radio01n',pad=((5,0),(50,0))),
-    sg.Button('Back',key='prefback',size=(10,1),pad=((700,0),(0,50)))]
-    window['most'].update('mot')
 
-border=1
+border=0
 plf=st=i=th=c=cc=0
 plpa='icon\\play.png'
 #gsud=gext=gtitle='f'
@@ -141,45 +128,28 @@ art=title=value='None'
 
 sg.theme('DarkBlack')
 
-#play.stopボタン=bb
 #ftm=sg.Frame('',[[sg.Button(image_filename=plpa,key='bb',button_color=('#ffffff', '#000000'),border_width=border)]],size=(680,100),border_width=border)
 ftm=sg.Frame('',[[sg.Button('Play',key='bb',button_color=('#ffffff', '#000000'),border_width=1,size=(6,3),pad=((300,0),(20,0)))]],size=(680,100),border_width=border)
-#size 680,100
 
-#曲名・アーティスト名表示
 ftl=sg.Frame('',[
     [sg.Text('no title',key='tit',font=('Segoe UI Variable Small Light',15),pad=((30,0),(20,0)))],
     [sg.Text(key='art',font=('Segoe UI Variable Small Light',9),pad=((30,0),(0,0)))]
-    ],size=(200,100),border_width=border)
-#size 300,100
-
-#artwork disp
-fart=sg.Image(filename='',key='arty',size=(100,100))
+    ],size=(300,100),border_width=border)
 
 ftr=sg.Frame('',[[sg.Button ('b',key='b'),sg.Button ('t',key='cc')]],size=(300,100),border_width=border)
-#size 300,100
 
-#主要
-defa=sg.Text('def',font=('Segoe UI Variable Small Light',40),pad=((30,0),(20,0)))
-fmi=sg.Frame('',[],key='most',size=(1040,620),border_width=border)
-'''
+fmi=sg.Frame('',[],size=(800,620),border_width=border)
+
 image_elem=sg.Image(source=f"art\\{art}_{title}.jpg",key='arrt')
 fle=sg.Frame('',[
     [image_elem]
-    ],size=(230,620),border_width=border)'''
+    ],size=(230,620),border_width=border)
 
-#left縦長
-fri=sg.Frame('',[
-    sg.Button('-',key='pref',size=(2,1))
-    ],size=(250,620),border_width=border)
+fri=sg.Frame('',[],size=(250,620),border_width=border)
 
-'''
+
 layout=[
     [fle,fmi,fri],[ftl,ftm,ftr]
-    ]'''
-
-layout=[
-    [fri,fmi],[fart,ftl,ftm,ftr]
     ]
 
 window=sg.Window('MusicPlayer',layout,resizable=True)
@@ -221,8 +191,7 @@ while True:
             
             if cc==0:
                 window['bb'].update('Pause')
-                #sud = 'music\\Preserved Roses.mp3'
-                sud = "C:\\Users\\s1gns\\Desktop\\Desktop\\Python\\musicplayer\\musicplayer\\music\\white forces.mp3"
+                sud = 'music\\Preserved Roses.mp3'
                 cc+=1
                 print(cc)
             elif cc==1:
@@ -231,9 +200,7 @@ while True:
                 print(cc)
             elif cc==2:
                 window['bb'].update('Play')
-                #sud = 'music\\white forces.mp3'
-                #sud = 'music\\RAGE OF DUST.mp3'
-                sud = "C:\\Users\\s1gns\\Desktop\\Desktop\\Python\\musicplayer\\musicplayer\\music\\future gazer.flac"
+                sud = 'music\\white forces.mp3'
                 cc+=1
                 print(cc)
             elif cc==3:
@@ -250,7 +217,6 @@ while True:
 
             window['tit'].update(title)
             window['art'].update(art)
-            window['artpath'].update(fart)
 
             if c==0:
                 window['bb'].update('Pause')
@@ -260,9 +226,6 @@ while True:
                 c=0
 
             #st=1
-
-    if event=='b':
-        print('pushed b')
 
     if event=='cc':
         if st==1:pass
@@ -274,12 +237,6 @@ while True:
             #data=set()
             window['tit'].update(title)
 
-    if event=='pref':
-        pref()
-
-    if event=='prefback':
-        window['most'].update('defa')
-        print('backed')
     #else:pass
 window.close()
 
@@ -328,17 +285,3 @@ plf=1
 thread3.join()
 
 print('\nBye')'''
-
-'''
-memo
-b==b button
-t==t button
-bb==play/stop button
-
-パスを変数に入れるときにエスケープシーケンスに注意
-
-進捗
-
-課題
-画像（アートワーク）表示
-'''
