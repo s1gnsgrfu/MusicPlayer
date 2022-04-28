@@ -92,8 +92,8 @@ def stop():
 
 def info():
     #print('Title:',ti1,'\tFormat:',ext,'\ttime:',round(time1),'sec','\tBitrate:',bit//1000,'Kbps','\tsamplerate:',slp,'Hz\n')
-    #print('Title:',title,'\tFormat:',ext,'\ttime:',round(time),'sec','\tBitrate:',bit//1000,'Kbps\n')
-    print('Title:',data[0],'\tFormat:',data[1],'\ttime:',round(data[2]),'sec','\tBitrate:',data[3]//1000,'Kbps\n')
+    print('Title:',title,'\tFormat:',ext,'\ttime:',round(time),'sec')
+    #print('Title:',data[0],'\tFormat:',data[1],'\ttime:',round(data[2]),'sec','\tBitrate:',data[3]//1000,'Kbps\n')
     return
 
 def playing():
@@ -154,7 +154,7 @@ ftl=sg.Frame('',[
 #size 300,100
 
 #artwork disp
-fart=sg.Image(filename='',key='arty',size=(100,100))
+fart=sg.Image('',filename='',key='arty',size=(100,100))
 
 ftr=sg.Frame('',[[sg.Button ('b',key='b'),sg.Button ('t',key='cc')]],size=(300,100),border_width=border)
 #size 300,100
