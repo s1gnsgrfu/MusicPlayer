@@ -121,6 +121,7 @@ def playing():
         time.sleep(1)
     return
 
+
 def pref():
     global mot
     print('pref')
@@ -153,7 +154,7 @@ ftl=sg.Frame('',[
     ],size=(200,100),border_width=border)
 #size 300,100
 
-#artwork disp
+#アートワーク表示
 fart=sg.Image('',filename='',key='arty',size=(100,100))
 
 ftr=sg.Frame('',[[sg.Button ('b',key='b'),sg.Button ('t',key='cc')]],size=(300,100),border_width=border)
@@ -169,9 +170,21 @@ fle=sg.Frame('',[
     ],size=(230,620),border_width=border)'''
 
 #left縦長
+'''
 fri=sg.Frame('',[
     sg.Button('-',key='pref',size=(2,1))
+    ],size=(250,620),border_width=border)'''
+#エラーでる．行
+
+
+#fri=sg.Frame('',[],size=(250,620),border_width=border)
+
+
+fri=sg.Frame('',[[
+    sg.Button('-',key='pref',size=(2,1))]
     ],size=(250,620),border_width=border)
+
+
 
 '''
 layout=[
